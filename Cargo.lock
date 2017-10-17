@@ -1,0 +1,4 @@
+[root]
+name = "chip8-emulator-stove"
+version = "0.1.0"
+

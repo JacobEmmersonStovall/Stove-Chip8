@@ -1,0 +1,6 @@
+[package]
+name = "chip8-emulator-stove"
+version = "0.1.0"
+authors = ["Jacob Stovall <jacob.stovall@asu.edu>"]
+
+[dependencies]
