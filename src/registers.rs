@@ -19,7 +19,7 @@ impl Registers{
             delay: 0,
             sound: 0,
             pc: 0,
-            sp: 0
+            sp: 0xFF
         }
     }
 
@@ -30,6 +30,75 @@ impl Registers{
 
     pub fn set_general_register_value(&mut self, index:usize, value:u8){
         self.general[index] = value;
+    }
+
+    pub fn push_to_stack(&mut self, value:u16){
+        if self.sp == 0xFF{
+            self.sp = 0;
+        }
+        else{
+            self.sp = self.sp + 1;
+        }
+        self.stack[(self.sp as usize)] = value;
+    }
+
+    pub fn peek_at_stack(&self) -> u16 {
+        self.stack[(self.sp as usize)]
+    }
+
+    pub fn pop_from_stack(&mut self) -> u16 {
+        let returnValue = self.stack[(self.sp as usize)];
+        if self.sp == 0{
+            self.sp = 0xFF;
+        }
+        else{
+            self.sp = self.sp - 1;
+        }
+        returnValue
+    }
+
+    pub fn set_pc(&mut self, value:u16){
+        self.pc = value;
+    }
+
+    pub fn get_pc(&self) -> u16 {
+        self.pc
+    }
+
+    pub fn set_i(&mut self, value:u16){
+        self.i = value;
+    }
+
+    pub fn get_i(&self) -> u16 {
+        self.i
+    }
+
+    pub fn set_delay(&mut self, value:u8){
+        self.delay = value;
+    }
+
+    pub fn get_delay(&self) -> u8 {
+        self.delay
+    }
+
+    pub fn decrement_delay(&mut self){
+        if self.delay > 0{
+            self.delay = self.delay - 1;
+        }
+    }
+
+    pub fn set_sound(&mut self, value:u8){
+        self.sound = value;
+    }
+
+    pub fn get_sound(&self) -> u8 {
+        self.sound
+    }
+
+    pub fn decrement_sound(&mut self){
+        if self.sound > 0{
+            self.sound = self.sound - 1;
+        }
     }
 }
 
